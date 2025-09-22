@@ -195,7 +195,13 @@ class HealthCheckManager {
             ]);
 
             // Get database connection info
-            const connectionCount = await this.prisma.$queryRaw`PRAGMA database_list` as any[];
+            // Use PostgreSQL-compatible query to get connection information
+            const connectionInfo = await this.prisma.$queryRaw`
+                SELECT 
+                    current_database() as database_name,
+                    current_user as user_name,
+                    version() as version
+            ` as any[];
 
             const responseTime = Date.now() - startTime;
 
@@ -205,8 +211,10 @@ class HealthCheckManager {
                 message: 'Database connection successful',
                 lastChecked: new Date().toISOString(),
                 details: {
-                    connections: connectionCount?.length || 0,
-                    database_type: 'sqlite'
+                    connections: 1, // PostgreSQL connection is active if query succeeds
+                    database_type: 'postgresql',
+                    database_name: connectionInfo?.[0]?.database_name,
+                    user: connectionInfo?.[0]?.user_name
                 }
             };
         } catch (error) {

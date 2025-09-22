@@ -1,4 +1,9 @@
+# Override Nixpacks default behavior to fix npm ci issues
+[phases.setup]
+nixPkgs = ["nodejs_18", "npm-9_x", "openssl"]
+
 [phases.install]
+# Skip default npm ci and use npm install instead
 cmd = "npm install --legacy-peer-deps"
 
 [phases.build]
@@ -6,3 +11,6 @@ cmd = "npm run build"
 
 [start]
 cmd = "npm start"
+
+[variables]
+NODE_ENV = "production"

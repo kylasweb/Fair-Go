@@ -159,7 +159,7 @@ class ConfigManager {
      */
     public async initializeFromDatabase(): Promise<void> {
         try {
-            const dashboardConfig = await this.adminService.getConfiguration();
+            const dashboardConfig = await this.adminService.getConfig();
 
             // Update AI service configuration
             this.config.ai = {

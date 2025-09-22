@@ -147,4 +147,41 @@ export class SessionManager {
             console.error('Error during session cleanup:', error);
         }
     }
+
+    // Additional methods for IVR service compatibility
+    getConversationContext(sessionId: string): any {
+        // Stub implementation - return null for now
+        return null;
+    }
+
+    findSessions(criteria: any): any[] {
+        // Stub implementation - return empty array
+        return [];
+    }
+
+    getGlobalStats(): any {
+        // Stub implementation
+        return {
+            totalSessions: 0,
+            activeSessions: 0,
+            avgDuration: 0
+        };
+    }
+
+    exportSessionData(sessionId: string): any {
+        // Stub implementation - return null for now
+        return null;
+    }
+
+    getSessionStats(sessionId: string): any {
+        // Stub implementation - return null for now
+        return null;
+    }
+
+    shutdown(): void {
+        // Stub implementation for graceful shutdown
+        if (this.redisClient) {
+            this.redisClient.quit();
+        }
+    }
 }

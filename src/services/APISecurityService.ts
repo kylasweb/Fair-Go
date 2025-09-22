@@ -237,7 +237,7 @@ export class APISecurityService {
         }
         try {
             const options: jwt.SignOptions = {
-                expiresIn: expiresIn,
+                expiresIn: expiresIn as any,
                 issuer: 'fairgo-api',
                 audience: 'fairgo-clients'
             };
@@ -678,11 +678,9 @@ export class APISecurityService {
 }
 
 // Extend Express Request type
-declare global {
-    namespace Express {
-        interface Request {
-            user?: JWTPayload;
-            apiKey?: APIKey;
-        }
+declare module 'express-serve-static-core' {
+    interface Request {
+        user?: JWTPayload;
+        apiKey?: APIKey;
     }
 }

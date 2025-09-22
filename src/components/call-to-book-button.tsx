@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import { NeoButton } from '@/components/ui/neo-button'
 import { Phone, Loader2 } from 'lucide-react'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -34,9 +34,10 @@ export function CallToBookButton({
   }
 
   return (
-    <Button 
+    <NeoButton 
+      variant="primary"
       size="lg" 
-      className={`bg-orange-500 hover:bg-orange-600 text-white ${className}`}
+      className={`bg-orange-500 hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-700 text-white ${className}`}
       onClick={handleCall}
       disabled={isCalling}
     >
@@ -51,6 +52,6 @@ export function CallToBookButton({
           Call to Book
         </>
       )}
-    </Button>
+    </NeoButton>
   )
 }

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { SignInForm } from '@/components/auth/signin-form'
 import { useToast } from '@/hooks/use-toast'
+import { NeoCard } from '@/components/ui/neo-card'
 
 export default function AuthPage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -90,26 +91,28 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center mb-4">
-            <div className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center">
-              <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
+    <div className="min-h-screen bg-neo-light dark:bg-neo-dark flex items-center justify-center p-4">
+      <NeoCard variant="raised" className="w-full max-w-md">
+        <div className="p-8">
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center mb-4">
+              <NeoCard variant="raised" size="sm" className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center">
+                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </NeoCard>
             </div>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">FairGo</h1>
+            <p className="text-gray-600 dark:text-gray-300 mt-2">AI-powered taxi booking platform</p>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">FairGo</h1>
-          <p className="text-gray-600 mt-2">AI-powered taxi booking platform</p>
+          
+          <SignInForm 
+            onSignIn={handleSignIn}
+            onSignUp={handleSignUp}
+            isLoading={isLoading}
+          />
         </div>
-        
-        <SignInForm 
-          onSignIn={handleSignIn}
-          onSignUp={handleSignUp}
-          isLoading={isLoading}
-        />
-      </div>
+      </NeoCard>
     </div>
   )
 }

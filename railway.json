@@ -1,0 +1,27 @@
+# railway.json - Railway deployment configuration
+{
+  "version": "2",
+  "build": {
+    "builder": "nixpacks",
+    "buildCommand": "npm ci && npm run build"
+  },
+  "deploy": {
+    "startCommand": "npm start",
+    "healthcheckPath": "/api/health",
+    "healthcheckTimeout": 30,
+    "restartPolicyType": "on_failure",
+    "restartPolicyMaxRetries": 3
+  },
+  "services": [
+    {
+      "name": "web",
+      "source": {
+        "type": "git"
+      },
+      "variables": {
+        "NODE_ENV": "production",
+        "PORT": "${{RAILWAY_STATIC_PORT}}"
+      }
+    }
+  ]
+}

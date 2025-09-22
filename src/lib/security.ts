@@ -9,7 +9,7 @@ import crypto from 'crypto';
 import { z } from 'zod';
 
 // XSS import with type declaration
-const xss = require('xss');
+import xss from 'xss';
 
 // Rate limiting configurations (basic implementation for Next.js)
 export const rateLimitConfigs = {

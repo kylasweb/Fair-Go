@@ -20,17 +20,17 @@ import ConfigManager from './config/ConfigManager';
  */
 class IVRServer {
     private app: express.Application;
-    private server: Server;
-    private logger: winston.Logger;
+    private server!: Server;
+    private logger!: winston.Logger;
     private config: ConfigManager;
     private prisma: PrismaClient;
 
     // AI Services
-    private sttService: SpeechToTextService;
-    private ttsService: TextToSpeechService;
-    private aiService: ConversationalAIService;
-    private audioHandler: AudioStreamHandler;
-    private sessionManager: SessionManager;
+    private sttService!: SpeechToTextService;
+    private ttsService!: TextToSpeechService;
+    private aiService!: ConversationalAIService;
+    private audioHandler!: AudioStreamHandler;
+    private sessionManager!: SessionManager;
 
     constructor() {
         this.app = express();
@@ -94,9 +94,9 @@ class IVRServer {
             this.sessionManager = new SessionManager(this.config.getSessionConfig());
 
             // Initialize AI services
-            this.sttService = new SpeechToTextService(this.config);
-            this.ttsService = new TextToSpeechService(this.config);
-            this.aiService = new ConversationalAIService(this.config);
+            this.sttService = new SpeechToTextService();
+            this.ttsService = new TextToSpeechService();
+            this.aiService = new ConversationalAIService(this.config as any);
 
             // Initialize audio stream handler
             this.audioHandler = new AudioStreamHandler(
@@ -123,16 +123,17 @@ class IVRServer {
 
         // CORS
         this.app.use(cors({
-            origin: systemConfig.cors.origin,
-            credentials: systemConfig.cors.credentials
+            origin: systemConfig.server.cors.origin,
+            credentials: systemConfig.server.cors.credentials
         }));
 
         // Rate limiting
-        this.app.use(rateLimit({
-            windowMs: systemConfig.rateLimit.windowMs,
-            max: systemConfig.rateLimit.max,
+        const limiter = rateLimit({
+            windowMs: systemConfig.server.rateLimit.windowMs,
+            max: systemConfig.server.rateLimit.max,
             message: 'Too many requests from this IP, please try again later.'
-        }));
+        });
+        this.app.use(limiter as any);
 
         // Body parsing
         this.app.use(express.json({ limit: '10mb' }));
@@ -237,12 +238,14 @@ class IVRServer {
             const { text, sessionId } = req.body;
 
             if (!text || !sessionId) {
-                return res.status(400).json({ error: 'Text and sessionId are required' });
+                res.status(400).json({ error: 'Text and sessionId are required' });
+                return;
             }
 
             const context = this.sessionManager.getConversationContext(sessionId);
             if (!context) {
-                return res.status(404).json({ error: 'Session not found' });
+                res.status(404).json({ error: 'Session not found' });
+                return;
             }
 
             const aiResponse = await this.aiService.processConversation(text, context);
@@ -265,7 +268,8 @@ class IVRServer {
             const { text, language = 'en', options = {} } = req.body;
 
             if (!text) {
-                return res.status(400).json({ error: 'Text is required' });
+                res.status(400).json({ error: 'Text is required' });
+                return;
             }
 
             const result = await this.ttsService.synthesizeConversationalSpeech(
@@ -275,7 +279,7 @@ class IVRServer {
             );
 
             res.set({
-                'Content-Type': result.audioFormat === 'mp3' ? 'audio/mpeg' : 'audio/wav',
+                'Content-Type': result.format === 'MP3' ? 'audio/mpeg' : 'audio/wav',
                 'Content-Length': result.audioContent.length.toString()
             });
 
@@ -326,7 +330,8 @@ class IVRServer {
             const sessionData = this.sessionManager.exportSessionData(sessionId);
 
             if (!sessionData) {
-                return res.status(404).json({ error: 'Session not found' });
+                res.status(404).json({ error: 'Session not found' });
+                return;
             }
 
             res.json(sessionData);
@@ -343,7 +348,8 @@ class IVRServer {
             const stats = this.sessionManager.getSessionStats(sessionId);
 
             if (!stats) {
-                return res.status(404).json({ error: 'Session not found' });
+                res.status(404).json({ error: 'Session not found' });
+                return;
             }
 
             res.json(stats);

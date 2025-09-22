@@ -1,4 +1,4 @@
-import WebSocket from 'ws';
+import WebSocket, { WebSocketServer } from 'ws';
 import { Server } from 'http';
 import winston from 'winston';
 import { EventEmitter } from 'events';
@@ -91,8 +91,8 @@ export class AudioStreamHandler extends EventEmitter {
     /**
      * Initialize WebSocket server for audio streaming
      */
-    initializeWebSocketServer(server: Server): WebSocket.Server {
-        const wss = new WebSocket.Server({
+    initializeWebSocketServer(server: Server): WebSocketServer {
+        const wss = new WebSocketServer({
             server,
             path: '/audio-stream'
         });

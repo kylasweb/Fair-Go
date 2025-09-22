@@ -10,6 +10,8 @@ import { VoiceBooking } from './voice-booking'
 import { PaymentMethods } from './payment/payment-methods'
 import { WalletManagement } from './payment/wallet-management'
 import { Button } from '@/components/ui/button'
+import { NeoCard } from '@/components/ui/neo-card'
+import { NeoButton } from '@/components/ui/neo-button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Menu, History, Users, Bell, User, Mic, Wallet } from 'lucide-react'
 import { useAuth } from '@/lib/auth-context'
@@ -240,10 +242,10 @@ export function BookingLayout({ }: BookingLayoutProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-neo-light dark:bg-neo-dark">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="container mx-auto px-4 py-4">
+      <header className="bg-white dark:bg-black shadow-sm border-b border-gray-200 dark:border-gray-800">
+        <NeoCard variant="flat" className="container mx-auto px-4 py-4 rounded-none border-0">
           <div className="flex items-center justify-between">
             <FairGoLogo />
             
@@ -299,60 +301,60 @@ export function BookingLayout({ }: BookingLayoutProps) {
               </div>
             </div>
           </div>
-        </div>
+        </NeoCard>
       </header>
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-6">
         {/* Tab Navigation */}
-        <div className="flex space-x-1 mb-6 bg-white rounded-lg p-1 shadow-sm">
-          <Button
-            variant={activeTab === 'book' ? 'default' : 'ghost'}
+        <NeoCard variant="flat" className="flex space-x-1 mb-6 p-1">
+          <NeoButton
+            variant={activeTab === 'book' ? 'primary' : 'ghost'}
             className="flex-1"
             onClick={() => setActiveTab('book')}
           >
             Book Ride
-          </Button>
-          <Button
-            variant={activeTab === 'voice' ? 'default' : 'ghost'}
+          </NeoButton>
+          <NeoButton
+            variant={activeTab === 'voice' ? 'primary' : 'ghost'}
             className="flex-1"
             onClick={() => setActiveTab('voice')}
           >
             <Mic className="w-4 h-4 mr-2" />
             Voice Book
-          </Button>
-          <Button
-            variant={activeTab === 'history' ? 'default' : 'ghost'}
+          </NeoButton>
+          <NeoButton
+            variant={activeTab === 'history' ? 'primary' : 'ghost'}
             className="flex-1"
             onClick={() => setActiveTab('history')}
           >
             <History className="w-4 h-4 mr-2" />
             History
-          </Button>
-          <Button
-            variant={activeTab === 'drivers' ? 'default' : 'ghost'}
+          </NeoButton>
+          <NeoButton
+            variant={activeTab === 'drivers' ? 'primary' : 'ghost'}
             className="flex-1"
             onClick={() => setActiveTab('drivers')}
           >
             <Users className="w-4 h-4 mr-2" />
             Drivers
-          </Button>
-          <Button
-            variant={activeTab === 'wallet' ? 'default' : 'ghost'}
+          </NeoButton>
+          <NeoButton
+            variant={activeTab === 'wallet' ? 'primary' : 'ghost'}
             className="flex-1"
             onClick={() => setActiveTab('wallet')}
           >
             <Wallet className="w-4 h-4 mr-2" />
             Wallet
-          </Button>
-          <Button
-            variant={activeTab === 'payments' ? 'default' : 'ghost'}
+          </NeoButton>
+          <NeoButton
+            variant={activeTab === 'payments' ? 'primary' : 'ghost'}
             className="flex-1"
             onClick={() => setActiveTab('payments')}
           >
             Payments
-          </Button>
-        </div>
+          </NeoButton>
+        </NeoCard>
 
         {/* Tab Content */}
         <div className="max-w-4xl mx-auto">

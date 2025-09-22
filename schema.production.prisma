@@ -1,0 +1,5 @@
+// Update your prisma/schema.prisma for production
+datasource db {
+    provider = "postgresql" // Changed from sqlite
+    url      = env("DATABASE_URL")
+}

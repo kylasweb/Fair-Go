@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/lib/auth-context";
 import { QueryProvider } from "@/lib/queries";
 import { NetworkStatusProvider } from "@/components/network-status-provider";
+import { ThemeProvider } from "@/contexts/theme-context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -130,16 +131,18 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//cdn.fairgo.app" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-neo-light dark:bg-neo-dark text-gray-800 dark:text-gray-200 transition-colors duration-300`}
       >
-        <QueryProvider>
-          <AuthProvider>
-            <NetworkStatusProvider>
-              {children}
-              <Toaster />
-            </NetworkStatusProvider>
-          </AuthProvider>
-        </QueryProvider>
+        <ThemeProvider>
+          <QueryProvider>
+            <AuthProvider>
+              <NetworkStatusProvider>
+                {children}
+                <Toaster />
+              </NetworkStatusProvider>
+            </AuthProvider>
+          </QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,0 +1,242 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+// Core booking and user models (existing)
+model User {
+    id        String   @id @default(cuid())
+    email     String   @unique
+    name      String?
+    phone     String   @unique
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    bookings Booking[]
+    calls    Call[]
+
+    @@map("users")
+}
+
+model Driver {
+    id        String   @id @default(cuid())
+    email     String   @unique
+    name      String
+    phone     String   @unique
+    licenseNo String   @unique
+    isActive  Boolean  @default(true)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    bookings Booking[]
+
+    @@map("drivers")
+}
+
+model Booking {
+    id                String    @id @default(cuid())
+    userId            String
+    driverId          String?
+    pickupLocation    String
+    dropoffLocation   String
+    pickupAddress     String?
+    dropoffAddress    String?
+    scheduledTime     DateTime?
+    actualPickupTime  DateTime?
+    actualDropoffTime DateTime?
+    vehicleType       String
+    passengerCount    Int       @default(1)
+    estimatedFare     Float
+    actualFare        Float?
+    status            String    @default("pending")
+    paymentMethod     String?
+    paymentStatus     String    @default("pending")
+    specialRequests   String?
+    createdAt         DateTime  @default(now())
+    updatedAt         DateTime  @updatedAt
+
+    user   User    @relation(fields: [userId], references: [id])
+    driver Driver? @relation(fields: [driverId], references: [id])
+    calls  Call[]
+
+    @@map("bookings")
+}
+
+// IVR and AI-specific models
+model Call {
+    id            String    @id @default(cuid())
+    userId        String?
+    sessionId     String    @unique
+    phoneNumber   String
+    twilioCallSid String?
+    status        String // 'active', 'completed', 'failed'
+    startTime     DateTime  @default(now())
+    endTime       DateTime?
+    duration      Int? // seconds
+    agentId       String?
+    bookingId     String?
+    language      String    @default("en")
+    recordingUrl  String?
+    transcription String?
+    metadata      String? // JSON string for additional data
+
+    user              User?              @relation(fields: [userId], references: [id])
+    agent             Agent?             @relation(fields: [agentId], references: [id])
+    booking           Booking?           @relation(fields: [bookingId], references: [id])
+    conversationTurns ConversationTurn[]
+
+    @@map("calls")
+}
+
+model ConversationTurn {
+    id           String   @id @default(cuid())
+    callId       String
+    turnNumber   Int
+    speaker      String // 'user' or 'assistant'
+    message      String
+    transcript   String?
+    confidence   Float?
+    intent       String?
+    entities     String? // JSON string
+    responseTime Int? // milliseconds
+    createdAt    DateTime @default(now())
+
+    call Call @relation(fields: [callId], references: [id], onDelete: Cascade)
+
+    @@map("conversation_turns")
+}
+
+// Agent and workflow management
+model Agent {
+    id                 String   @id @default(cuid())
+    name               String
+    type               String // 'booking', 'support', 'driver', 'custom'
+    isActive           Boolean  @default(true)
+    model              String // 'gpt-4', 'gpt-3.5-turbo', etc.
+    systemPrompt       String
+    customInstructions String?
+    hierarchy          String // JSON string for hierarchy config
+    performance        String? // JSON string for performance metrics
+    createdAt          DateTime @default(now())
+    updatedAt          DateTime @updatedAt
+
+    workflows     Workflow[]
+    knowledgeBase KnowledgeBase[]
+    calls         Call[]
+
+    @@map("agents")
+}
+
+model Workflow {
+    id          String   @id @default(cuid())
+    agentId     String
+    type        String // 'start', 'getUserInput', 'playAudio', etc.
+    config      String // JSON string for node configuration
+    position    String // JSON string for UI position
+    connections String // JSON string for connections to other nodes
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+
+    agent Agent @relation(fields: [agentId], references: [id], onDelete: Cascade)
+
+    @@map("workflows")
+}
+
+model KnowledgeBase {
+    id        String   @id @default(cuid())
+    agentId   String
+    type      String // 'faq', 'document', 'context'
+    question  String?
+    answer    String?
+    category  String?
+    content   String?
+    metadata  String? // JSON string for additional data
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    agent Agent @relation(fields: [agentId], references: [id], onDelete: Cascade)
+
+    @@map("knowledge_base")
+}
+
+// System configuration and settings
+model Setting {
+    id          String   @id @default(cuid())
+    key         String   @unique
+    value       String
+    category    String // 'ai_services', 'system', 'ui'
+    description String?
+    isEncrypted Boolean  @default(false)
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+
+    @@map("settings")
+}
+
+// Analytics and monitoring
+model CallAnalytics {
+    id                 String   @id @default(cuid())
+    callId             String?  @unique
+    agentId            String?
+    date               DateTime @default(now())
+    totalCalls         Int      @default(0)
+    successfulBookings Int      @default(0)
+    failedCalls        Int      @default(0)
+    avgCallDuration    Float?
+    avgResponseTime    Float?
+    userSatisfaction   Float?
+    language           String?
+    peakHour           Int?
+    metadata           String? // JSON string for additional metrics
+
+    @@map("call_analytics")
+}
+
+model SystemMetrics {
+    id                String   @id @default(cuid())
+    timestamp         DateTime @default(now())
+    cpuUsage          Float?
+    memoryUsage       Float?
+    activeConnections Int?
+    queueLength       Int?
+    responseTime      Float?
+    errorRate         Float?
+    throughput        Float?
+
+    @@map("system_metrics")
+}
+
+// Location and service area management
+model ServiceArea {
+    id          String  @id @default(cuid())
+    name        String
+    type        String // 'district', 'city', 'landmark'
+    coordinates String? // JSON string for lat/lng
+    aliases     String? // JSON array of alternative names
+    isActive    Boolean @default(true)
+    parentId    String? // For hierarchical locations
+    metadata    String? // JSON string for additional data
+
+    @@map("service_areas")
+}
+
+// API keys and credentials (encrypted)
+model ApiCredential {
+    id             String    @id @default(cuid())
+    service        String    @unique // 'openai', 'google_cloud', 'twilio'
+    keyName        String
+    encryptedValue String
+    isActive       Boolean   @default(true)
+    expiresAt      DateTime?
+    createdAt      DateTime  @default(now())
+    updatedAt      DateTime  @updatedAt
+
+    @@map("api_credentials")
+}

@@ -4,11 +4,17 @@ FROM node:18
 # Set working directory
 WORKDIR /app
 
+# Install Python and build tools for native modules
+RUN apt-get update && apt-get install -y python3 make g++ && rm -rf /var/lib/apt/lists/*
+
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies with legacy peer deps (skip postinstall)
+# Install dependencies with legacy peer deps (skip postinstall initially)
 RUN npm install --legacy-peer-deps --ignore-scripts
+
+# Force reinstall LightningCSS to ensure native binaries are properly built
+RUN npm install lightningcss --force
 
 # Copy application code (including prisma directory)
 COPY . .

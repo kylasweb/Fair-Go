@@ -27,10 +27,13 @@
 3. Configure deployment settings:
    - Name: fairgo-production
    - Environment: Node
-   - Build Command: npm install && npm run build
-   - Start Command: npm start
+   - Build Command: npm run render-build
+   - Start Command: npm run start:render
    - Instance Type: Free (or Starter $7/month)
 ```
+
+**IMPORTANT**: Make sure to use the exact build/start commands above! 
+The `render-build` script includes `--legacy-peer-deps` to resolve dependency conflicts.
 
 ### 3. Add PostgreSQL Database
 
@@ -76,8 +79,8 @@ services:
   - type: web
     name: fairgo-production
     env: node
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+    buildCommand: npm run render-build
+    startCommand: npm run start:render
     healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
@@ -187,3 +190,45 @@ psql $RENDER_DATABASE_URL < fairgo_backup.sql
 - **Environment Variables**: https://render.com/docs/environment-variables
 
 Ready to migrate to Render.com? It should resolve the persistent health check issues you're experiencing with Railway!
+
+## 🔧 Troubleshooting Common Issues
+
+### Build Command Issues
+If your deployment fails with dependency errors, make sure you're using the correct commands:
+
+**❌ Wrong (causes ERESOLVE errors):**
+- Build Command: `npm install && npm run build`
+- Start Command: `npm start`
+
+**✅ Correct:**
+- Build Command: `npm run render-build` 
+- Start Command: `npm run start:render`
+
+The `render-build` script includes `--legacy-peer-deps` to resolve Express 5.x dependency conflicts.
+
+### Quick Fix for Current Failed Deployment
+
+1. **Go to your Render dashboard**
+2. **Click on your service → Settings**
+3. **Update Build & Deploy settings:**
+   - Build Command: `npm run render-build`
+   - Start Command: `npm run start:render`
+4. **Click "Save Changes"**
+5. **Go to "Deploys" tab and click "Deploy latest commit"**
+
+### Environment Variable Checklist
+Make sure these are set in Render dashboard:
+- ✅ `DATABASE_URL` (from PostgreSQL service)
+- ✅ `NODE_ENV=production`
+- ✅ `NEXTAUTH_SECRET` (32+ characters)
+- ✅ `NEXTAUTH_URL` (your Render app URL)
+- ✅ `SOCKET_IO_SECRET`
+
+### Dependency Resolution Issues
+If you see ERESOLVE errors, the build command must include `--legacy-peer-deps`. 
+Our `render-build` script handles this automatically.
+
+### Health Check Timeout
+Render is much more forgiving than Railway (5+ minutes vs 30 seconds), but if needed:
+- Health Check Path: `/api/health`
+- Health Check Command: Leave blank (uses HTTP GET)

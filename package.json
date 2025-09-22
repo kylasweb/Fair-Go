@@ -84,7 +84,6 @@
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.6.0",
     "express": "^5.1.0",
-    "express-prometheus-middleware": "^1.2.0",
     "express-rate-limit": "^8.1.0",
     "framer-motion": "^12.23.16",
     "helmet": "^8.1.0",

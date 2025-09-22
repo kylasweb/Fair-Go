@@ -1,6 +1,6 @@
 import winston from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
-import { ecsFormat } from '@elastic/ecs-winston-format';
+// import { ecsFormat } from '@elastic/ecs-winston-format'; // Commented out to avoid elastic-apm-node dependency
 import path from 'path';
 import fs from 'fs';
 import os from 'os';
@@ -85,14 +85,12 @@ class FairGoLogger {
             })
         );
 
-        // File format using ECS (Elastic Common Schema)
+        // File format using JSON instead of ECS to avoid elastic-apm-node dependency
         const fileFormat = winston.format.combine(
             winston.format.timestamp(),
             winston.format.errors({ stack: true }),
-            ecsFormat({
-                serviceName: 'fairgo-platform',
-                serviceVersion: process.env.APP_VERSION || '1.0.0',
-                convertReqRes: true
+            winston.format.json({
+                space: 2
             })
         );
 

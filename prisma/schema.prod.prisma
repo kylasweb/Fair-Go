@@ -1,0 +1,15 @@
+// This file serves as a reference for the production PostgreSQL schema
+// The main schema.prisma uses SQLite for development, and Railway deployment 
+// will use PostgreSQL with environment variable configuration
+
+// Production schema configuration:
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
+// For Railway deployment:
+// 1. Add PostgreSQL database in Railway dashboard
+// 2. Railway automatically sets DATABASE_URL environment variable
+// 3. The deployment uses PostgreSQL regardless of local schema.prisma provider setting
+// 4. Run: railway run npx prisma migrate deploy (after PostgreSQL is added)

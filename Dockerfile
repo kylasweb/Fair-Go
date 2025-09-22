@@ -16,6 +16,9 @@ RUN npm install --legacy-peer-deps --ignore-scripts
 # Force reinstall LightningCSS to ensure native binaries are properly built
 RUN npm install lightningcss --force
 
+# Force reinstall TailwindCSS Oxide native module
+RUN npm install @tailwindcss/oxide --force
+
 # Copy application code (including prisma directory)
 COPY . .
 

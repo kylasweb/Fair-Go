@@ -1,29 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getDetailedHealthStatus } from '../../../monitoring';
-import { logger } from '../../../monitoring';
 
-// GET /api/health - Comprehensive health check
+// GET /api/health - Simple health check for Railway
 export async function GET(request: NextRequest) {
     const startTime = Date.now();
 
     try {
-        // Get comprehensive health status from monitoring system
-        const healthStatus = await getDetailedHealthStatus();
+        // Simple health check - just verify the server is responding
         const responseTime = Date.now() - startTime;
-
-        // Log health check request
-        logger.info('Health check requested', {
-            component: 'api',
-            operation: 'health_check',
-            metadata: {
-                response_time_ms: responseTime,
-                overall_status: healthStatus.status,
-                timestamp: healthStatus.timestamp
+        
+        const healthStatus = {
+            status: 'UP',
+            timestamp: new Date().toISOString(),
+            service: 'fairgo-platform',
+            version: '1.0.0',
+            responseTime: `${responseTime}ms`,
+            checks: {
+                server: 'HEALTHY',
+                database: 'UNKNOWN'
             }
-        });
+        };
 
         return NextResponse.json(healthStatus, {
-            status: healthStatus.status === 'UP' ? 200 : 503,
+            status: 200,
             headers: {
                 'Cache-Control': 'no-cache, no-store, must-revalidate',
                 'Content-Type': 'application/json',
@@ -33,28 +31,16 @@ export async function GET(request: NextRequest) {
 
     } catch (error) {
         const responseTime = Date.now() - startTime;
-
-        logger.error('Health check failed', error instanceof Error ? error : new Error(String(error)), {
-            component: 'api',
-            operation: 'health_check_failed',
-            metadata: {
-                response_time_ms: responseTime,
-                error_type: 'health_check_error'
-            }
-        });
-
+        
         return NextResponse.json({
             status: 'DOWN',
             timestamp: new Date().toISOString(),
-            error: error instanceof Error ? error.message : 'Health check failed',
-            details: {
-                message: 'Unable to perform health checks',
-                responseTime: responseTime
-            }
+            service: 'fairgo-platform',
+            error: error instanceof Error ? error.message : 'Unknown error',
+            responseTime: `${responseTime}ms`
         }, {
             status: 503,
             headers: {
-                'Cache-Control': 'no-cache, no-store, must-revalidate',
                 'Content-Type': 'application/json',
                 'X-Response-Time': `${responseTime}ms`
             }

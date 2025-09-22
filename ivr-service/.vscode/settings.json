@@ -1,0 +1,4 @@
+{
+  "prisma.schema": "./prisma/schema.prisma",
+  "typescript.preferences.rootPath": "./ivr-service"
+}

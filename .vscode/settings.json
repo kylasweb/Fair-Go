@@ -1,4 +1,27 @@
 {
   "json.schemaDownload.enable": false,
-  "json.validate.enable": false
+  "json.validate.enable": false,
+  "prisma.showPrismaDataPlatformNotification": false,
+  "prisma.schemaPath": "./prisma/schema.prisma",
+  "files.exclude": {
+    "**/ivr-service/prisma/**": true,
+    "**/deployment/**": true,
+    "**/.prisma/**": true
+  },
+  "search.exclude": {
+    "**/ivr-service/node_modules": true,
+    "**/ivr-service/dist": true,
+    "**/ivr-service/prisma/**": true,
+    "**/deployment/**": true,
+    "**/.prisma/**": true
+  },
+  "files.watcherExclude": {
+    "**/ivr-service/node_modules/**": true,
+    "**/ivr-service/dist/**": true,
+    "**/ivr-service/prisma/**": true,
+    "**/deployment/**": true,
+    "**/.prisma/**": true
+  },
+  "typescript.preferences.rootPath": ".",
+  "typescript.preferences.includePackageJsonAutoImports": "on"
 }

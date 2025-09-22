@@ -1,0 +1,22 @@
+{
+  "folders": [
+    {
+      "name": "FairGo Main App",
+      "path": "."
+    },
+    {
+      "name": "FairGo IVR Service",
+      "path": "./ivr-service"
+    }
+  ],
+  "settings": {
+    "prisma.schema": "./prisma/schema.prisma",
+    "typescript.preferences.rootPath": "."
+  },
+  "extensions": {
+    "recommendations": [
+      "prisma.prisma",
+      "ms-vscode.vscode-typescript-next"
+    ]
+  }
+}

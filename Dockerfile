@@ -1,5 +1,5 @@
-# Use Node.js 18 Alpine image for smaller size
-FROM node:18-alpine
+# Use Node.js 18 (regular Debian-based image for better compatibility)
+FROM node:18
 
 # Set working directory
 WORKDIR /app

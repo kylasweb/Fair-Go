@@ -178,42 +178,50 @@ class APMManager {
     }
 
     private collectPerformanceMetrics() {
-        const memUsage = process.memoryUsage();
-        const cpuUsage = process.cpuUsage();
+        try {
+            const memUsage = process.memoryUsage();
+            const cpuUsage = process.cpuUsage();
 
-        // Update system metrics
-        metricsCollector.memoryUsage.set({ type: 'heap_used' }, memUsage.heapUsed / 1024 / 1024);
-        metricsCollector.memoryUsage.set({ type: 'heap_total' }, memUsage.heapTotal / 1024 / 1024);
-        metricsCollector.memoryUsage.set({ type: 'rss' }, memUsage.rss / 1024 / 1024);
-        metricsCollector.memoryUsage.set({ type: 'external' }, memUsage.external / 1024 / 1024);
-
-        // Track active requests
-        metricsCollector.activeWebsockets.set({ connection_type: 'http', user_type: 'total' }, this.activeRequests.size);
-
-        // Log performance metrics
-        logger.performance('system_metrics', {
-            duration: 0, // N/A for system metrics
-            component: 'system',
-            success: true,
-            metadata: {
-                memory_heap_used_mb: Math.round(memUsage.heapUsed / 1024 / 1024),
-                memory_heap_total_mb: Math.round(memUsage.heapTotal / 1024 / 1024),
-                memory_rss_mb: Math.round(memUsage.rss / 1024 / 1024),
-                active_requests: this.activeRequests.size,
-                uptime_seconds: Math.round(process.uptime())
+            // Update system metrics safely
+            if (metricsCollector.memoryUsage) {
+                metricsCollector.memoryUsage.set({ type: 'heap_used' }, memUsage.heapUsed / 1024 / 1024);
+                metricsCollector.memoryUsage.set({ type: 'heap_total' }, memUsage.heapTotal / 1024 / 1024);
+                metricsCollector.memoryUsage.set({ type: 'rss' }, memUsage.rss / 1024 / 1024);
+                metricsCollector.memoryUsage.set({ type: 'external' }, memUsage.external / 1024 / 1024);
             }
-        });
 
-        // Check for memory issues
-        const heapUsedMB = memUsage.heapUsed / 1024 / 1024;
-        if (heapUsedMB > this.performanceThresholds.memory_threshold_mb) {
-            logger.warning('High memory usage detected', {
-                component: 'apm',
+            // Track active requests
+            if (metricsCollector.activeWebsockets) {
+                metricsCollector.activeWebsockets.set({ connection_type: 'http', user_type: 'total' }, this.activeRequests.size);
+            }
+
+            // Log performance metrics
+            logger.performance('system_metrics', {
+                duration: 0, // N/A for system metrics
+                component: 'system',
+                success: true,
                 metadata: {
-                    heap_used_mb: Math.round(heapUsedMB),
-                    threshold_mb: this.performanceThresholds.memory_threshold_mb
+                    memory_heap_used_mb: Math.round(memUsage.heapUsed / 1024 / 1024),
+                    memory_heap_total_mb: Math.round(memUsage.heapTotal / 1024 / 1024),
+                    memory_rss_mb: Math.round(memUsage.rss / 1024 / 1024),
+                    active_requests: this.activeRequests.size,
+                    uptime_seconds: Math.round(process.uptime())
                 }
             });
+
+            // Check for memory issues
+            const heapUsedMB = memUsage.heapUsed / 1024 / 1024;
+            if (heapUsedMB > this.performanceThresholds.memory_threshold_mb) {
+                logger.warning('High memory usage detected', {
+                    component: 'apm',
+                    metadata: {
+                        heap_used_mb: Math.round(heapUsedMB),
+                        threshold_mb: this.performanceThresholds.memory_threshold_mb
+                    }
+                });
+            }
+        } catch (error) {
+            logger.error('Performance metrics collection failed', error as Error);
         }
     }
 

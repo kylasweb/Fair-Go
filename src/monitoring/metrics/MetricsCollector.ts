@@ -171,6 +171,20 @@ class MetricsCollector {
             registers: [this.registry]
         });
 
+        this.memoryUsage = new Gauge({
+            name: 'fairgo_memory_usage_mb',
+            help: 'Memory usage in megabytes',
+            labelNames: ['type'],
+            registers: [this.registry]
+        });
+
+        this.cpuUsage = new Gauge({
+            name: 'fairgo_cpu_usage_microseconds',
+            help: 'CPU usage in microseconds',
+            labelNames: ['type'],
+            registers: [this.registry]
+        });
+
         // Security Metrics
         this.authenticationAttempts = new Counter({
             name: 'fairgo_auth_attempts_total',

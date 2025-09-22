@@ -19,6 +19,9 @@ RUN npm install lightningcss --force
 # Force reinstall TailwindCSS Oxide native module
 RUN npm install @tailwindcss/oxide --force
 
+# Force reinstall esbuild and its platform-specific binaries for tsx runtime
+RUN npm install esbuild @esbuild/linux-x64 --force
+
 # Copy application code (including prisma directory)
 COPY . .
 

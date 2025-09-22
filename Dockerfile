@@ -7,13 +7,13 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies with legacy peer deps
-RUN npm install --legacy-peer-deps
+# Install dependencies with legacy peer deps (skip postinstall)
+RUN npm install --legacy-peer-deps --ignore-scripts
 
-# Copy application code
+# Copy application code (including prisma directory)
 COPY . .
 
-# Generate Prisma client
+# Generate Prisma client (now that schema is available)
 RUN npx prisma generate
 
 # Build the application

@@ -94,12 +94,14 @@ databases:
 ## 🔧 Render.com Advantages
 
 ### Better Health Checks
+
 - More reasonable timeout periods (5+ minutes vs 30 seconds)
 - Gradual health check escalation
 - Better error reporting and logs
 - Option to disable health checks during development
 
 ### Superior Next.js Support
+
 ```json
 // Render automatically detects and optimizes for:
 {
@@ -111,6 +113,7 @@ databases:
 ```
 
 ### Enhanced Logging
+
 - Real-time deployment logs
 - Application runtime logs
 - Build process visibility
@@ -118,6 +121,7 @@ databases:
 - Performance metrics
 
 ### Database Integration
+
 - Automatic connection string generation
 - Built-in connection pooling
 - Backup and recovery options
@@ -127,15 +131,17 @@ databases:
 ## 🚀 Migration from Railway
 
 ### 1. Export Data (if needed)
+
 ```bash
 # From Railway PostgreSQL
 pg_dump $RAILWAY_DATABASE_URL > fairgo_backup.sql
 
-# Import to Render PostgreSQL  
+# Import to Render PostgreSQL
 psql $RENDER_DATABASE_URL < fairgo_backup.sql
 ```
 
 ### 2. Update Environment Variables
+
 ```bash
 # Copy variables from Railway to Render dashboard
 # Update NEXTAUTH_URL to: https://fairgo-production.onrender.com
@@ -143,6 +149,7 @@ psql $RENDER_DATABASE_URL < fairgo_backup.sql
 ```
 
 ### 3. Deploy and Test
+
 ```bash
 # Render will auto-deploy from GitHub
 # Monitor logs in Render dashboard
@@ -151,21 +158,21 @@ psql $RENDER_DATABASE_URL < fairgo_backup.sql
 
 ## 📊 Render.com vs Railway Comparison
 
-| Feature | Render.com | Railway |
-|---------|------------|---------|
-| Health Checks | Flexible, forgiving | Strict 30s timeout |
+| Feature         | Render.com          | Railway              |
+| --------------- | ------------------- | -------------------- |
+| Health Checks   | Flexible, forgiving | Strict 30s timeout   |
 | Next.js Support | Native optimization | Manual configuration |
-| Logs | Real-time, detailed | Limited visibility |
-| Database Setup | Integrated UI | CLI-heavy |
-| Debugging | Excellent tooling | Basic logs |
-| Free Tier | 750 hours/month | $5 credit |
-| Custom Domains | Free SSL | Free SSL |
-| Build Times | Fast | Variable |
+| Logs            | Real-time, detailed | Limited visibility   |
+| Database Setup  | Integrated UI       | CLI-heavy            |
+| Debugging       | Excellent tooling   | Basic logs           |
+| Free Tier       | 750 hours/month     | $5 credit            |
+| Custom Domains  | Free SSL            | Free SSL             |
+| Build Times     | Fast                | Variable             |
 
 ## 🎯 Why Render.com Should Work Better
 
 1. **Health Check Tolerance** - Render gives your app more time to start
-2. **Better Error Handling** - Clearer error messages when things go wrong  
+2. **Better Error Handling** - Clearer error messages when things go wrong
 3. **Next.js Optimization** - Built-in Next.js deployment optimizations
 4. **PostgreSQL Integration** - Smoother database connection handling
 5. **Real-time Debugging** - Better visibility into what's failing

@@ -21,7 +21,6 @@ databases:
     plan: free
     databaseName: fairgo
     user: fairgo_user
-
 # Optional: Background worker for processing tasks
 # - type: worker
 #   name: fairgo-worker

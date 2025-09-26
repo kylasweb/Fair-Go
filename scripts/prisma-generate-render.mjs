@@ -3,9 +3,10 @@
 // Render.com Prisma generation script
 // Sets the correct binary targets for Linux deployment
 
-process.env.PRISMA_CLI_BINARY_TARGETS = 'linux-musl-openssl-3.0.x';
+import { execSync } from 'child_process';
 
-const { execSync } = require('child_process');
+// Set environment variable for Prisma binary targets
+process.env.PRISMA_CLI_BINARY_TARGETS = 'linux-musl-openssl-3.0.x';
 
 try {
   console.log('🔧 Generating Prisma client for Render.com deployment...');

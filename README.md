@@ -1,68 +1,312 @@
-# 🚀 Welcome to Z.ai Code Scaffold
+# � FairGo - Modern Ride-Hailing Platform
 
-A modern, production-ready web application scaffold powered by cutting-edge technologies, designed to accelerate your development with [Z.ai](https://chat.z.ai)'s AI-powered coding assistance.
+[![Next.js](https://img.shields.io/badge/Next.js-15.0-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-6.5-green)](https://prisma.io/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC)](https://tailwindcss.com/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## ✨ Technology Stack
+A comprehensive, AI-powered ride-hailing platform built with modern web technologies. FairGo revolutionizes ride-sharing with competitive bidding, real-time navigation, and advanced driver-rider matching.
 
-This scaffold provides a robust foundation built with:
+## � Key Features
 
-### 🎯 Core Framework
-- **⚡ Next.js 15** - The React framework for production with App Router
-- **📘 TypeScript 5** - Type-safe JavaScript for better developer experience
-- **🎨 Tailwind CSS 4** - Utility-first CSS framework for rapid UI development
+### 🏆 **Competitive Bidding System**
 
-### 🧩 UI Components & Styling
-- **🧩 shadcn/ui** - High-quality, accessible components built on Radix UI
-- **🎯 Lucide React** - Beautiful & consistent icon library
-- **🌈 Framer Motion** - Production-ready motion library for React
-- **🎨 Next Themes** - Perfect dark mode in 2 lines of code
+- **Auction-style ride allocation** with real-time bidding
+- **Dynamic pricing** based on demand and driver competition
+- **Time-limited auctions** with automatic winner selection
+- **Transparent bidding history** and driver ratings
 
-### 📋 Forms & Validation
-- **🎣 React Hook Form** - Performant forms with easy validation
-- **✅ Zod** - TypeScript-first schema validation
+### 💰 **Advanced Commission & Earnings**
 
-### 🔄 State Management & Data Fetching
-- **🐻 Zustand** - Simple, scalable state management
-- **🔄 TanStack Query** - Powerful data synchronization for React
-- **🌐 Axios** - Promise-based HTTP client
+- **Customizable commission rates** by time, day, and distance
+- **Real-time earnings tracking** for drivers
+- **Admin commission management** with detailed analytics
+- **Wallet system** with deposits, withdrawals, and transaction history
 
-### 🗄️ Database & Backend
-- **🗄️ Prisma** - Next-generation Node.js and TypeScript ORM
-- **🔐 NextAuth.js** - Complete open-source authentication solution
+### 🗺️ **Real-Time Navigation & Tracking**
 
-### 🎨 Advanced UI Features
-- **📊 TanStack Table** - Headless UI for building tables and datagrids
-- **🖱️ DND Kit** - Modern drag and drop toolkit for React
-- **📊 Recharts** - Redefined chart library built with React and D3
-- **🖼️ Sharp** - High performance image processing
+- **Live GPS tracking** for drivers and riders
+- **Route optimization** with Google Maps integration
+- **ETA calculations** with traffic-aware routing
+- **WebSocket-powered** real-time location updates
 
-### 🌍 Internationalization & Utilities
-- **🌍 Next Intl** - Internationalization library for Next.js
-- **📅 Date-fns** - Modern JavaScript date utility library
-- **🪝 ReactUse** - Collection of essential React hooks for modern development
+### 🎯 **AI-Powered Features**
 
-## 🎯 Why This Scaffold?
+- **Voice booking** with Google Speech-to-Text
+- **AI chat support** for customer service
+- **Smart matching** algorithms for optimal ride allocation
+- **Predictive pricing** based on historical data
 
-- **🏎️ Fast Development** - Pre-configured tooling and best practices
-- **🎨 Beautiful UI** - Complete shadcn/ui component library with advanced interactions
-- **🔒 Type Safety** - Full TypeScript configuration with Zod validation
-- **📱 Responsive** - Mobile-first design principles with smooth animations
-- **🗄️ Database Ready** - Prisma ORM configured for rapid backend development
-- **🔐 Auth Included** - NextAuth.js for secure authentication flows
-- **📊 Data Visualization** - Charts, tables, and drag-and-drop functionality
-- **🌍 i18n Ready** - Multi-language support with Next Intl
-- **🚀 Production Ready** - Optimized build and deployment settings
-- **🤖 AI-Friendly** - Structured codebase perfect for AI assistance
+### � **Multi-Role User Management**
+
+- **Riders**: Book rides, track drivers, manage payments
+- **Drivers**: Accept rides, manage earnings, update location
+- **Admins**: Platform management, analytics, commission control
+
+## �️ Technology Stack
+
+### 🎯 **Core Framework**
+
+- **⚡ Next.js 15** - React framework with App Router
+- **📘 TypeScript 5** - Type-safe JavaScript development
+- **� Tailwind CSS 4** - Utility-first CSS framework
+- **🧩 shadcn/ui** - High-quality component library
+
+### 🗄️ **Database & Backend**
+
+- **🗄️ Prisma ORM** - Type-safe database operations
+- **🐘 PostgreSQL** - Robust relational database
+- **🔐 Custom Auth** - Secure authentication system
+- **🌐 WebSocket** - Real-time communication
+
+### 🗺️ **Maps & Location**
+
+- **�️ Google Maps API** - Location services and routing
+- **📍 GPS Tracking** - Real-time location updates
+- **🧭 Route Optimization** - Efficient path finding
+
+### 🎤 **AI & Voice**
+
+- **🎤 Google Speech-to-Text** - Voice command processing
+- **🔊 Google Text-to-Speech** - Audio feedback
+- **🤖 AI Chat Integration** - Intelligent customer support
+
+### 📊 **Data & Analytics**
+
+- **📊 Winston Logging** - Comprehensive logging system
+- **📈 Performance Monitoring** - Application metrics
+- **� Audit Trails** - Security and compliance logging
 
 ## 🚀 Quick Start
 
+### Prerequisites
+
+- **Node.js 18+**
+- **PostgreSQL 15+**
+- **Google Maps API Key**
+- **Google Cloud Speech API credentials**
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/kylasweb/Fair-Go.git
+   cd Fair-Go
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Environment Setup**
+
+   ```bash
+   cp .env.example .env.local
+   ```
+
+   Configure your environment variables:
+
+   ```env
+   DATABASE_URL="postgresql://username:password@localhost:5432/fairgo"
+   GOOGLE_MAPS_API_KEY="your_google_maps_api_key"
+   GOOGLE_CLOUD_PROJECT_ID="your_project_id"
+   NEXTAUTH_SECRET="your_nextauth_secret"
+   NEXTAUTH_URL="http://localhost:3000"
+   ```
+
+4. **Database Setup**
+
+   ```bash
+   # Generate Prisma client
+   npm run db:generate
+
+   # Push database schema
+   npm run db:push
+
+   # (Optional) Run migrations
+   npm run db:migrate
+   ```
+
+5. **Start Development Server**
+
+   ```bash
+   npm run dev
+   ```
+
+6. **Open your browser**
+   ```
+   http://localhost:3000
+   ```
+
+## 📁 Project Structure
+
+```
+fair-go/
+├── prisma/
+│   ├── schema.prisma          # Database schema
+│   └── migrations/            # Database migrations
+├── public/                    # Static assets
+├── src/
+│   ├── app/                   # Next.js App Router
+│   │   ├── api/               # API routes
+│   │   │   ├── auth/          # Authentication endpoints
+│   │   │   ├── bookings/      # Ride booking APIs
+│   │   │   ├── drivers/       # Driver management
+│   │   │   ├── wallet/        # Payment & wallet
+│   │   │   └── admin/         # Admin panel APIs
+│   │   ├── admin/             # Admin dashboard pages
+│   │   ├── auth/              # Authentication pages
+│   │   ├── booking/           # Ride booking interface
+│   │   ├── driver/            # Driver dashboard
+│   │   └── profile/           # User profiles
+│   ├── components/            # React components
+│   │   ├── ui/                # shadcn/ui components
+│   │   ├── auth/              # Authentication components
+│   │   ├── booking/           # Booking-related components
+│   │   ├── driver/            # Driver components
+│   │   ├── bidding/           # Auction system components
+│   │   ├── payment/           # Payment components
+│   │   └── navigation/        # Maps & navigation
+│   ├── lib/                   # Utility libraries
+│   │   ├── db.ts              # Database client
+│   │   ├── auth.ts            # Authentication utilities
+│   │   ├── ai-service.ts      # AI integration
+│   │   ├── socket.ts          # WebSocket client
+│   │   └── commission/        # Commission calculations
+│   └── hooks/                 # Custom React hooks
+├── server.ts                  # Express server for WebSocket
+├── tailwind.config.ts         # Tailwind configuration
+├── next.config.ts            # Next.js configuration
+├── prisma.config.ts          # Prisma configuration
+└── eslint.config.mjs         # ESLint configuration
+```
+
+## 🎯 Core Features Breakdown
+
+### 🏆 **Bidding System**
+
+- **Real-time auctions** for ride allocation
+- **Driver bidding interface** with location-based filtering
+- **Rider bid management** with countdown timers
+- **Automatic winner selection** and booking assignment
+
+### � **Commission Management**
+
+- **Dynamic commission rates** based on multiple factors
+- **Driver earnings dashboard** with detailed breakdowns
+- **Admin commission controls** with analytics
+- **Transparent fee structure** for all stakeholders
+
+### 🗺️ **Navigation & Tracking**
+
+- **Live GPS tracking** with WebSocket updates
+- **Route visualization** on interactive maps
+- **ETA calculations** with traffic consideration
+- **Driver location sharing** with riders
+
+### 👥 **User Management**
+
+- **Role-based access control** (Rider, Driver, Admin)
+- **Profile management** with document verification
+- **Secure authentication** with session management
+- **Multi-device support** with real-time sync
+
+## � API Reference
+
+### Authentication Endpoints
+
+```
+POST /api/auth/signin          # User login
+POST /api/auth/signup          # User registration
+GET  /api/auth/me              # Get current user
+POST /api/auth/signout         # User logout
+```
+
+### Booking Endpoints
+
+```
+GET  /api/bookings             # List user bookings
+POST /api/bookings             # Create new booking
+GET  /api/bookings/[id]        # Get booking details
+PATCH /api/bookings/[id]       # Update booking status
+POST /api/bookings/create-bid-ride  # Create bidding-enabled booking
+```
+
+### Bidding System
+
+```
+POST /api/bookings/[id]/bid    # Place bid on booking
+GET  /api/bookings/[id]/bid    # Get bids for booking
+POST /api/bookings/[id]/accept-bid/[bidId]  # Accept winning bid
+GET  /api/drivers/available-bids  # Get available bidding opportunities
+```
+
+### Driver Management
+
+```
+GET  /api/drivers/profile      # Get driver profile
+POST /api/drivers/register     # Register as driver
+GET  /api/drivers/navigation-status/[id]  # Get driver location
+```
+
+### Payment & Wallet
+
+```
+GET  /api/wallet               # Get wallet balance
+GET  /api/wallet/transactions  # Get transaction history
+POST /api/wallet/withdrawals/request  # Request withdrawal
+```
+
+### Admin Endpoints
+
+```
+GET  /api/admin/dashboard      # Admin dashboard data
+GET  /api/admin/commissions    # Commission management
+GET  /api/admin/withdrawals    # Withdrawal requests
+```
+
+## 🧪 Testing
+
 ```bash
-# Install dependencies
-npm install
+# Run all tests
+npm test
 
-# Start development server
-npm run dev
+# Run tests in watch mode
+npm run test:watch
 
+# Generate coverage report
+npm run test:coverage
+```
+
+## 🚀 Deployment
+
+### Environment Variables
+
+Ensure all required environment variables are set in your deployment platform:
+
+```env
+# Database
+DATABASE_URL="postgresql://..."
+
+# Authentication
+NEXTAUTH_SECRET="your-secret"
+NEXTAUTH_URL="https://your-domain.com"
+
+# Google Services
+GOOGLE_MAPS_API_KEY="..."
+GOOGLE_CLOUD_PROJECT_ID="..."
+
+# AI Services (Optional)
+OPENAI_API_KEY="..."
+```
+
+### Build Commands
+
+```bash
 # Build for production
 npm run build
 
@@ -70,72 +314,98 @@ npm run build
 npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see your application running.
+### Supported Platforms
 
-## 🤖 Powered by Z.ai
+- **Vercel** (recommended for Next.js)
+- **Railway**
+- **Render**
+- **AWS/GCP/Azure** (with custom deployment)
 
-This scaffold is optimized for use with [Z.ai](https://chat.z.ai) - your AI assistant for:
+## 🤝 Contributing
 
-- **💻 Code Generation** - Generate components, pages, and features instantly
-- **🎨 UI Development** - Create beautiful interfaces with AI assistance  
-- **🔧 Bug Fixing** - Identify and resolve issues with intelligent suggestions
-- **📝 Documentation** - Auto-generate comprehensive documentation
-- **🚀 Optimization** - Performance improvements and best practices
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-Ready to build something amazing? Start chatting with Z.ai at [chat.z.ai](https://chat.z.ai) and experience the future of AI-powered development!
+### Development Guidelines
 
-## 📁 Project Structure
+- Follow TypeScript best practices
+- Write comprehensive tests for new features
+- Update documentation for API changes
+- Ensure all tests pass before submitting PR
 
-```
-src/
-├── app/                 # Next.js App Router pages
-├── components/          # Reusable React components
-│   └── ui/             # shadcn/ui components
-├── hooks/              # Custom React hooks
-└── lib/                # Utility functions and configurations
-```
+## 📊 Performance & Monitoring
 
-## 🎨 Available Features & Components
+### Logging System
 
-This scaffold includes a comprehensive set of modern web development tools:
+- **Application logs**: General app events
+- **Error logs**: Exceptions and failures
+- **Audit logs**: Security and compliance events
+- **Performance logs**: Response times and metrics
 
-### 🧩 UI Components (shadcn/ui)
-- **Layout**: Card, Separator, Aspect Ratio, Resizable Panels
-- **Forms**: Input, Textarea, Select, Checkbox, Radio Group, Switch
-- **Feedback**: Alert, Toast (Sonner), Progress, Skeleton
-- **Navigation**: Breadcrumb, Menubar, Navigation Menu, Pagination
-- **Overlay**: Dialog, Sheet, Popover, Tooltip, Hover Card
-- **Data Display**: Badge, Avatar, Calendar
+### Monitoring Features
 
-### 📊 Advanced Data Features
-- **Tables**: Powerful data tables with sorting, filtering, pagination (TanStack Table)
-- **Charts**: Beautiful visualizations with Recharts
-- **Forms**: Type-safe forms with React Hook Form + Zod validation
+- **Real-time metrics** dashboard
+- **Error tracking** and alerting
+- **Performance monitoring** with OpenTelemetry
+- **Database query optimization**
 
-### 🎨 Interactive Features
-- **Animations**: Smooth micro-interactions with Framer Motion
-- **Drag & Drop**: Modern drag-and-drop functionality with DND Kit
-- **Theme Switching**: Built-in dark/light mode support
+## � Security
 
-### 🔐 Backend Integration
-- **Authentication**: Ready-to-use auth flows with NextAuth.js
-- **Database**: Type-safe database operations with Prisma
-- **API Client**: HTTP requests with Axios + TanStack Query
-- **State Management**: Simple and scalable with Zustand
+### Authentication & Authorization
 
-### 🌍 Production Features
-- **Internationalization**: Multi-language support with Next Intl
-- **Image Optimization**: Automatic image processing with Sharp
-- **Type Safety**: End-to-end TypeScript with Zod validation
-- **Essential Hooks**: 100+ useful React hooks with ReactUse for common patterns
+- **JWT-based authentication** with secure session management
+- **Role-based access control** (RBAC)
+- **API rate limiting** and request validation
+- **Input sanitization** and SQL injection prevention
 
-## 🤝 Get Started with Z.ai
+### Data Protection
 
-1. **Clone this scaffold** to jumpstart your project
-2. **Visit [chat.z.ai](https://chat.z.ai)** to access your AI coding assistant
-3. **Start building** with intelligent code generation and assistance
-4. **Deploy with confidence** using the production-ready setup
+- **GDPR compliance** features
+- **Data encryption** at rest and in transit
+- **Secure payment processing** with PCI compliance
+- **Audit trails** for sensitive operations
+
+## 📈 Roadmap
+
+### Phase 3 (Upcoming)
+
+- [ ] **Advanced Analytics Dashboard**
+- [ ] **Mobile App Development**
+- [ ] **Multi-city Support**
+- [ ] **Integration APIs** for third-party services
+- [ ] **Advanced AI Features**
+
+### Future Enhancements
+
+- [ ] **Machine Learning** for demand prediction
+- [ ] **Blockchain Integration** for transparent transactions
+- [ ] **IoT Integration** for smart vehicle features
+- [ ] **Sustainability Features** (eco-friendly routing)
+
+## 📞 Support
+
+- **Documentation**: [docs.fairgo.com](https://docs.fairgo.com)
+- **Issues**: [GitHub Issues](https://github.com/kylasweb/Fair-Go/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/kylasweb/Fair-Go/discussions)
+- **Email**: support@fairgo.com
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Next.js Team** for the amazing React framework
+- **Prisma Team** for the excellent ORM
+- **shadcn** for the beautiful UI components
+- **Google Cloud** for AI and Maps services
+- **Open Source Community** for the incredible tools and libraries
 
 ---
 
-Built with ❤️ for the developer community. Supercharged by [Z.ai](https://chat.z.ai) 🚀
+**Built with ❤️ for safer, smarter, and more efficient transportation.**
+
+⭐ **Star this repo** if you find it helpful!

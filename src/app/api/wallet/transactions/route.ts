@@ -47,7 +47,11 @@ export async function GET(request: NextRequest) {
             walletId: wallet.id
         }
 
-        if (type) whereConditions.type = type
+        if (type) {
+            if (type === 'CREDIT') whereConditions.type = 'DEPOSIT'
+            else if (type === 'DEBIT') whereConditions.type = 'WITHDRAWAL'
+            else whereConditions.type = type
+        }
         if (status) whereConditions.status = status
         if (startDate || endDate) {
             whereConditions.createdAt = {}
@@ -57,55 +61,79 @@ export async function GET(request: NextRequest) {
 
         // TODO: Implement proper WalletTransaction model
         // For now, return empty transactions since walletTransaction model doesn't exist
-        const transactions: any[] = []
-        const totalCount = 0
+        // const transactions: any[] = []
+        // const totalCount = 0
 
-        // const [transactions, totalCount] = await Promise.all([
-        //     db.walletTransaction.findMany({
-        //         where: whereConditions,
-        //         include: {
-        //             booking: {
-        //                 select: {
-        //                     id: true,
-        //                     pickupLocation: true,
-        //                     dropLocation: true,
-        //                     status: true,
-        //                     createdAt: true
-        //                 }
-        //             }
-        //         },
-        //         orderBy: {
-        //             createdAt: 'desc'
-        //         },
-        //         take: limit,
-        //         skip: offset
-        //     }),
-        //     db.walletTransaction.count({
-        //         where: whereConditions
-        //     })
-        // ])
+        const [transactions, totalCount] = await Promise.all([
+            db.walletTransaction.findMany({
+                where: whereConditions,
+                include: {
+                    booking: {
+                        select: {
+                            id: true,
+                            pickupLocation: true,
+                            dropLocation: true,
+                            status: true,
+                            createdAt: true
+                        }
+                    }
+                },
+                orderBy: {
+                    createdAt: 'desc'
+                },
+                take: limit,
+                skip: offset
+            }),
+            db.walletTransaction.count({
+                where: whereConditions
+            })
+        ])
 
         // Get transaction summary
-        const summary = {
-            totalCredits: 0,
-            totalDebits: 0,
-            pendingTransactions: 0,
-            completedTransactions: 0
+        // const summary = {
+        //     totalCredits: 0,
+        //     totalDebits: 0,
+        //     pendingTransactions: 0,
+        //     completedTransactions: 0
+        // }
+        const summary = await db.walletTransaction.groupBy({
+            by: ['type', 'status'],
+            where: {
+                walletId: wallet.id
+            },
+            _sum: {
+                amount: true
+            },
+            _count: true
+        })
+
+        // Calculate totals
+        const totalCredits = summary
+            .filter(s => s.type === 'DEPOSIT' && s.status === 'COMPLETED')
+            .reduce((sum, s) => sum + (s._sum?.amount || 0), 0)
+
+        const totalDebits = summary
+            .filter(s => s.type === 'WITHDRAWAL' && s.status === 'COMPLETED')
+            .reduce((sum, s) => sum + (s._sum?.amount || 0), 0)
+
+        const pendingTransactions = summary
+            .filter(s => s.status === 'PENDING')
+            .reduce((sum, s) => sum + (s._count || 0), 0)
+
+        const completedTransactions = summary
+            .filter(s => s.status === 'COMPLETED')
+            .reduce((sum, s) => sum + (s._count || 0), 0)
+
+        const transactionSummary = {
+            totalCredits,
+            totalDebits,
+            pendingTransactions,
+            completedTransactions
         }
-        // const summary = await db.walletTransaction.groupBy({
-        //     by: ['type', 'status'],
-        //     where: {
-        //         walletId: wallet.id
-        //     },
-        //     _sum: {
-        //         amount: true
-        //     },
-        //     _count: true
-        // })
 
         return NextResponse.json({
             transactions,
-            summary,
+            summary: transactionSummary,
             totalCount,
             hasMore: offset + transactions.length < totalCount,
             walletBalance: wallet.balance

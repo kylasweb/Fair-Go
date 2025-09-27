@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
     }
 
     const token = authHeader.substring(7)
-    
+
     // Extract user ID from token
     const tokenParts = token.split('_')
     if (tokenParts.length < 2 || tokenParts[0] !== 'token') {
@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
     }
 
     const token = authHeader.substring(7)
-    
+
     // Extract user ID from token
     const tokenParts = token.split('_')
     if (tokenParts.length < 2 || tokenParts[0] !== 'token') {
@@ -113,7 +113,7 @@ export async function POST(request: NextRequest) {
 
     // Process payment (in a real app, integrate with payment gateway)
     const transactionId = `txn_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-    
+
     // Create payment record
     const newPayment = await db.payment.create({
       data: {
@@ -136,8 +136,39 @@ export async function POST(request: NextRequest) {
       }
     })
 
-    // Update driver stats if driver exists
+    // Calculate and apply commission if driver exists
     if (booking.driverId) {
+      try {
+        const { calculateCommission } = await import('@/lib/commission/calculator')
+        const commissionCalculation = await calculateCommission(
+          booking.driverId,
+          amount,
+          new Date(),
+          booking.distance || undefined
+        )
+
+        // Update booking with commission details
+        await db.booking.update({
+          where: { id: bookingId },
+          data: {
+            commissionAmount: commissionCalculation.commissionAmount,
+            commissionRate: commissionCalculation.appliedRate
+          }
+        })
+
+        console.log(`Commission calculated for booking ${bookingId}:`, {
+          driverId: booking.driverId,
+          amount,
+          commissionAmount: commissionCalculation.commissionAmount,
+          appliedRate: commissionCalculation.appliedRate,
+          driverEarnings: commissionCalculation.driverEarnings
+        })
+      } catch (commissionError) {
+        console.error('Error calculating commission:', commissionError)
+        // Don't fail the payment if commission calculation fails
+      }
+
+      // Update driver stats
       await db.driver.update({
         where: { id: booking.driverId },
         data: {
@@ -157,7 +188,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Payment processing error:', error)
     return NextResponse.json(
-      { 
+      {
         success: false,
         message: 'Failed to process payment',
         error: error instanceof Error ? error.message : 'Unknown error'

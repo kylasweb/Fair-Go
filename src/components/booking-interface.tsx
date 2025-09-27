@@ -14,6 +14,8 @@ import { useUserWebSocket } from '@/lib/websocket'
 import { toast } from 'sonner'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
+import { MapView, LocationSearch, RouteDisplay } from './navigation'
+import { BidList } from './bidding'
 
 interface BookingInterfaceProps {
   onBookRide?: (bookingData: BookingData) => void
@@ -35,6 +37,11 @@ export function BookingInterface({ onBookRide }: BookingInterfaceProps) {
   const [isCalculating, setIsCalculating] = useState(false)
   const [estimatedPrice, setEstimatedPrice] = useState<number | null>(null)
   const [currentLocation, setCurrentLocation] = useState<{ lat: number; lng: number } | null>(null)
+  const [showMap, setShowMap] = useState(false)
+  const [routeData, setRouteData] = useState<any>(null)
+  const [isBiddingMode, setIsBiddingMode] = useState(false)
+  const [biddingDuration, setBiddingDuration] = useState(300) // 5 minutes default
+  const [createdBidBooking, setCreatedBidBooking] = useState<any>(null)
 
   const { user, isAuthenticated } = useAuth()
   const { activeBooking } = useBookings()
@@ -127,7 +134,7 @@ export function BookingInterface({ onBookRide }: BookingInterfaceProps) {
         setDropCoords(dropLocation_coords)
       }
 
-      // Calculate distance if we have both coordinates
+      // Calculate distance and fetch route if we have both coordinates
       if (pickupCoords && dropLocation_coords) {
         const distance = calculateDistance(pickupCoords, dropLocation_coords)
         const selectedVehicle = vehicleTypes.find(v => v.value === vehicleType)
@@ -135,6 +142,25 @@ export function BookingInterface({ onBookRide }: BookingInterfaceProps) {
         if (selectedVehicle) {
           const price = Math.round(selectedVehicle.basePrice + (distance * 12)) // ₹12 per km
           setEstimatedPrice(price)
+        }
+
+        // Fetch route data for map display
+        try {
+          const routeResponse = await fetch('/api/navigation/route', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              origin: pickupCoords,
+              destination: dropLocation_coords
+            })
+          })
+
+          if (routeResponse.ok) {
+            const routeData = await routeResponse.json()
+            setRouteData(routeData)
+          }
+        } catch (routeError) {
+          console.warn('Failed to fetch route data:', routeError)
         }
       } else {
         // Fallback to estimated pricing
@@ -178,31 +204,68 @@ export function BookingInterface({ onBookRide }: BookingInterfaceProps) {
       return
     }
 
-    if (!pickupLocation || !dropLocation || !vehicleType || !estimatedPrice) {
+    if (!pickupLocation || !dropLocation || !vehicleType) {
       toast.error('Please fill in all booking details')
       return
     }
 
     try {
-      const bookingData = {
-        pickupLocation,
-        dropLocation,
-        pickupCoords: pickupCoords || undefined,
-        dropCoords: dropCoords || undefined,
-        vehicleType,
-        estimatedPrice,
-        userId: user!.id,
-      }
+      if (isBiddingMode) {
+        // Create bidding-enabled booking
+        const response = await fetch('/api/bookings/create-bid-ride', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            pickupLocation,
+            dropLocation,
+            pickupLat: pickupCoords?.lat,
+            pickupLng: pickupCoords?.lng,
+            dropLat: dropCoords?.lat,
+            dropLng: dropCoords?.lng,
+            vehicleType,
+            estimatedPrice: estimatedPrice || 0,
+            biddingDuration
+          })
+        })
 
-      const booking = await createBookingMutation.mutateAsync(bookingData)
-      
-      if (onBookRide) {
-        onBookRide({
+        if (!response.ok) {
+          const error = await response.json()
+          throw new Error(error.error || 'Failed to create bidding booking')
+        }
+
+        const data = await response.json()
+        setCreatedBidBooking(data.booking)
+
+        toast.success('Bidding booking created! Waiting for driver bids...')
+      } else {
+        // Regular booking
+        if (!estimatedPrice) {
+          toast.error('Please wait for price calculation')
+          return
+        }
+
+        const bookingData = {
           pickupLocation,
           dropLocation,
+          pickupCoords: pickupCoords || undefined,
+          dropCoords: dropCoords || undefined,
           vehicleType,
           estimatedPrice,
-        })
+          userId: user!.id,
+        }
+
+        const booking = await createBookingMutation.mutateAsync(bookingData)
+
+        if (onBookRide) {
+          onBookRide({
+            pickupLocation,
+            dropLocation,
+            vehicleType,
+            estimatedPrice,
+          })
+        }
+
+        toast.success('Ride booked successfully! Finding a driver...')
       }
 
       // Reset form
@@ -210,10 +273,11 @@ export function BookingInterface({ onBookRide }: BookingInterfaceProps) {
       setDropCoords(null)
       setVehicleType('')
       setEstimatedPrice(null)
-      
-      toast.success('Ride booked successfully! Finding a driver...')
+      setIsBiddingMode(false)
+
     } catch (error) {
       console.error('Booking failed:', error)
+      toast.error(error instanceof Error ? error.message : 'Failed to book ride')
     }
   }
 
@@ -301,32 +365,37 @@ export function BookingInterface({ onBookRide }: BookingInterfaceProps) {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="pickup">Pickup Location</Label>
-            <div className="flex gap-2">
-              <Input
-                id="pickup"
-                value={pickupLocation}
-                onChange={(e) => setPickupLocation(e.target.value)}
-                placeholder="Enter pickup location"
-                className="flex-1"
+            <div className="space-y-2">
+              <LocationSearch
+                placeholder="Enter pickup location or search..."
+                onPlaceSelect={(place) => {
+                  setPickupLocation(place.address)
+                  setPickupCoords({ lat: place.lat, lng: place.lng })
+                }}
+                defaultValue={pickupLocation}
               />
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 size="sm"
                 onClick={useCurrentLocationForPickup}
-                title="Use current location"
+                className="w-full"
+                type="button"
               >
-                <Navigation className="h-4 w-4" />
+                <Navigation className="h-4 w-4 mr-2" />
+                Use Current Location
               </Button>
             </div>
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="drop">Drop Location</Label>
-            <Input
-              id="drop"
-              value={dropLocation}
-              onChange={(e) => setDropLocation(e.target.value)}
-              placeholder="Enter destination"
+            <LocationSearch
+              placeholder="Enter destination or search..."
+              onPlaceSelect={(place) => {
+                setDropLocation(place.address)
+                setDropCoords({ lat: place.lat, lng: place.lng })
+              }}
+              defaultValue={dropLocation}
             />
           </div>
 
@@ -351,6 +420,94 @@ export function BookingInterface({ onBookRide }: BookingInterfaceProps) {
               </SelectContent>
             </Select>
           </div>
+
+          {/* Bidding Mode Toggle */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <Label htmlFor="bidding-mode">Enable Competitive Bidding</Label>
+              <Button
+                variant={isBiddingMode ? "default" : "outline"}
+                size="sm"
+                onClick={() => setIsBiddingMode(!isBiddingMode)}
+                type="button"
+              >
+                {isBiddingMode ? 'Bidding Enabled' : 'Enable Bidding'}
+              </Button>
+            </div>
+            {isBiddingMode && (
+              <p className="text-sm text-gray-600">
+                Multiple drivers will bid for your ride. You can choose the best offer within the time limit.
+              </p>
+            )}
+          </div>
+
+          {isBiddingMode && (
+            <div className="space-y-2">
+              <Label htmlFor="bidding-duration">Bidding Duration</Label>
+              <Select value={biddingDuration.toString()} onValueChange={(value) => setBiddingDuration(parseInt(value))}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select duration" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="180">3 minutes</SelectItem>
+                  <SelectItem value="300">5 minutes</SelectItem>
+                  <SelectItem value="600">10 minutes</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+
+          {/* Map View for Route Visualization */}
+          {pickupCoords && dropCoords && (
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Label>Route Preview</Label>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowMap(!showMap)}
+                >
+                  {showMap ? 'Hide Map' : 'Show Map'}
+                </Button>
+              </div>
+
+              {showMap && (
+                <div className="space-y-2">
+                  <MapView
+                    center={{
+                      lat: (pickupCoords.lat + dropCoords.lat) / 2,
+                      lng: (pickupCoords.lng + dropCoords.lng) / 2
+                    }}
+                    zoom={12}
+                    markers={[
+                      {
+                        position: pickupCoords,
+                        title: 'Pickup Location'
+                      },
+                      {
+                        position: dropCoords,
+                        title: 'Drop Location'
+                      }
+                    ]}
+                    polylines={routeData ? [{
+                      path: routeData.polyline,
+                      strokeColor: '#3b82f6',
+                      strokeWeight: 4
+                    }] : []}
+                    className="w-full h-48 rounded-lg border"
+                  />
+
+                  {routeData && (
+                    <RouteDisplay
+                      origin={{ lat: pickupCoords!.lat, lng: pickupCoords!.lng, address: pickupLocation }}
+                      destination={{ lat: dropCoords!.lat, lng: dropCoords!.lng, address: dropLocation }}
+                      className="mt-2"
+                    />
+                  )}
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Nearby Drivers Info */}
           {nearbyDrivers && nearbyDrivers.length > 0 && (
@@ -423,6 +580,51 @@ export function BookingInterface({ onBookRide }: BookingInterfaceProps) {
           </div>
         </CardContent>
       </Card>
+
+      {/* Bidding Booking Status */}
+      {createdBidBooking && (
+        <Card className="w-full max-w-md mx-auto">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Clock className="h-5 w-5" />
+              Waiting for Driver Bids
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="text-center">
+              <p className="text-sm text-gray-600 mb-4">
+                Your booking is now open for competitive bidding. Drivers will submit their offers within the time limit.
+              </p>
+
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
+                <div className="text-sm">
+                  <p className="font-medium">Booking Details:</p>
+                  <p>From: {createdBidBooking.pickupLocation}</p>
+                  {createdBidBooking.dropLocation && <p>To: {createdBidBooking.dropLocation}</p>}
+                  <p>Vehicle: {createdBidBooking.vehicleType.replace('_', ' ')}</p>
+                  <p>Base Price: ₹{createdBidBooking.estimatedPrice}</p>
+                </div>
+              </div>
+
+              <BidList
+                bookingId={createdBidBooking.id}
+                onAcceptBid={(bidId) => {
+                  console.log('Accepted bid:', bidId)
+                  setCreatedBidBooking(null) // Hide the bidding interface
+                }}
+              />
+
+              <Button
+                variant="outline"
+                onClick={() => setCreatedBidBooking(null)}
+                className="mt-4"
+              >
+                Cancel Bidding
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Voice Booking Alternative */}
       <Card className="w-full max-w-md mx-auto">

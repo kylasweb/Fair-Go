@@ -124,17 +124,17 @@ export async function POST(request: NextRequest) {
 
         // TODO: Create proper WalletTransaction model or use Payment model
         // Create transaction record
-        // transaction = await prisma.walletTransaction.create({
-        //   data: {
-        //     walletId: wallet!.id,
-        //     amount,
-        //     type: 'CREDIT',
-        //     description: description || `Added ₹${amount} to wallet`,
-        //     paymentMethod: method || 'CARD',
-        //     paymentReference,
-        //     status: 'COMPLETED'
-        //   }
-        // })
+        transaction = await prisma.walletTransaction.create({
+          data: {
+            walletId: wallet!.id,
+            amount,
+            type: 'DEPOSIT',
+            description: description || `Added ₹${amount} to wallet`,
+            paymentMethod: method || 'CARD',
+            paymentReference,
+            status: 'COMPLETED'
+          }
+        })
 
         return {
           success: true,
@@ -160,16 +160,16 @@ export async function POST(request: NextRequest) {
 
         // TODO: Create proper WalletTransaction model or use Payment model
         // Create transaction record
-        // transaction = await prisma.walletTransaction.create({
-        //   data: {
-        //     walletId: wallet!.id,
-        //     amount,
-        //     type: 'DEBIT',
-        //     description: description || `Deducted ₹${amount} from wallet`,
-        //     bookingId,
-        //     status: 'COMPLETED'
-        //   }
-        // })
+        transaction = await prisma.walletTransaction.create({
+          data: {
+            walletId: wallet!.id,
+            amount,
+            type: 'WITHDRAWAL',
+            description: description || `Deducted ₹${amount} from wallet`,
+            bookingId,
+            status: 'COMPLETED'
+          }
+        })
 
         return {
           success: true,

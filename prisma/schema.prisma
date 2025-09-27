@@ -63,10 +63,13 @@ model Driver {
   updatedAt          DateTime    @updatedAt
 
   // Relations
-  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  bookings  Booking[]
-  reviews   Review[]
-  documents Document[]
+  user              User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bookings          Booking[]
+  reviews           Review[]
+  documents         Document[]
+  withdrawalMethods WithdrawalMethod[]
+  driverCommissions DriverCommission[]
+  bids              RideBid[]
 
   @@map("drivers")
 }
@@ -87,35 +90,42 @@ model Admin {
 
 // Booking Models
 model Booking {
-  id             String        @id @default(cuid())
-  userId         String
-  driverId       String?
-  status         BookingStatus @default(REQUESTED)
-  pickupLocation String
-  pickupLat      Float
-  pickupLng      Float
-  dropLocation   String?
-  dropLat        Float?
-  dropLng        Float?
-  vehicleType    VehicleType   @default(CAR_ECONOMY)
-  estimatedPrice Float
-  finalPrice     Float?
-  fare           Float? // Alternative field name for finalPrice
-  distance       Float? // in kilometers
-  duration       Int? // in minutes
-  bookingType    BookingType   @default(MANUAL)
-  aiSessionId    String? // For AI-powered bookings
-  notes          String? // Additional booking notes
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-  completedAt    DateTime?
+  id               String        @id @default(cuid())
+  userId           String
+  driverId         String?
+  status           BookingStatus @default(REQUESTED)
+  pickupLocation   String
+  pickupLat        Float
+  pickupLng        Float
+  dropLocation     String?
+  dropLat          Float?
+  dropLng          Float?
+  vehicleType      VehicleType   @default(CAR_ECONOMY)
+  estimatedPrice   Float
+  finalPrice       Float?
+  fare             Float? // Alternative field name for finalPrice
+  distance         Float? // in kilometers
+  duration         Int? // in minutes
+  bookingType      BookingType   @default(MANUAL)
+  aiSessionId      String? // For AI-powered bookings
+  notes            String? // Additional booking notes
+  commissionAmount Float? // Commission amount deducted from driver earnings
+  commissionRate   Float? // Commission rate applied (percentage)
+  biddingEnabled   Boolean       @default(false)
+  biddingEndTime   DateTime?
+  winningBidId     String?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  completedAt      DateTime?
 
   // Relations
-  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  driver   Driver?   @relation(fields: [driverId], references: [id])
-  reviews  Review[]
-  payments Payment[]
-  tracking Tracking?
+  user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  driver             Driver?             @relation(fields: [driverId], references: [id])
+  reviews            Review[]
+  payments           Payment[]
+  tracking           Tracking?
+  walletTransactions WalletTransaction[]
+  bids               RideBid[]
 
   @@map("bookings")
 }
@@ -163,9 +173,61 @@ model Wallet {
   updatedAt DateTime @updatedAt
 
   // Relations
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  walletTransactions WalletTransaction[]
 
   @@map("wallets")
+}
+
+// Wallet Transaction System
+model WalletTransaction {
+  id                 String                  @id @default(cuid())
+  walletId           String
+  amount             Float
+  type               WalletTransactionType
+  status             WalletTransactionStatus @default(PENDING)
+  description        String?
+  paymentMethod      String?
+  paymentReference   String?
+  bookingId          String?
+  withdrawalMethodId String?
+  failureReason      String?
+  processedAt        DateTime?
+  createdAt          DateTime                @default(now())
+  updatedAt          DateTime                @updatedAt
+
+  // Relations
+  wallet           Wallet?           @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  booking          Booking?          @relation(fields: [bookingId], references: [id])
+  withdrawalMethod WithdrawalMethod? @relation(fields: [withdrawalMethodId], references: [id])
+
+  @@map("wallet_transactions")
+}
+
+// Driver Withdrawal Methods
+model WithdrawalMethod {
+  id                String               @id @default(cuid())
+  driverId          String
+  type              WithdrawalMethodType
+  accountNumber     String?
+  accountHolderName String?
+  bankName          String?
+  ifscCode          String?
+  upiId             String?
+  paypalEmail       String?
+  stripeAccountId   String?
+  isDefault         Boolean              @default(false)
+  isVerified        Boolean              @default(false)
+  verifiedAt        DateTime?
+  isActive          Boolean              @default(true)
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+
+  // Relations
+  driver             Driver              @relation(fields: [driverId], references: [id], onDelete: Cascade)
+  walletTransactions WalletTransaction[]
+
+  @@map("withdrawal_methods")
 }
 
 // Review System
@@ -201,6 +263,25 @@ model Document {
   driver Driver @relation(fields: [driverId], references: [id], onDelete: Cascade)
 
   @@map("documents")
+}
+
+// Driver Commission Configuration
+model DriverCommission {
+  id                     String   @id @default(cuid())
+  driverId               String   @unique
+  baseCommission         Float    @default(10.00) // Base commission percentage (10%)
+  peakHourCommission     Float    @default(15.00) // Peak hours commission (15%)
+  nightCommission        Float    @default(12.00) // Night time commission (12%)
+  weekendCommission      Float    @default(12.00) // Weekend commission (12%)
+  longDistanceCommission Float? // Optional: higher commission for long rides
+  isActive               Boolean  @default(true)
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  // Relations
+  driver Driver @relation(fields: [driverId], references: [id], onDelete: Cascade)
+
+  @@map("driver_commissions")
 }
 
 // Notification System
@@ -413,6 +494,32 @@ enum FinetuneJobStatus {
   CANCELLED
 }
 
+enum WalletTransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+enum WalletTransactionType {
+  DEPOSIT
+  WITHDRAWAL
+}
+
+enum WithdrawalMethodType {
+  BANK_TRANSFER
+  UPI
+  PAYPAL
+  STRIPE
+}
+
+enum BidStatus {
+  ACTIVE
+  ACCEPTED
+  REJECTED
+  EXPIRED
+  CANCELLED
+}
+
 // API Security Models
 model ApiCredential {
   id             String    @id @default(cuid())
@@ -427,6 +534,25 @@ model ApiCredential {
   updatedAt      DateTime  @updatedAt
 
   @@map("api_credentials")
+}
+
+// Bidding System Models
+model RideBid {
+  id                   String    @id @default(cuid())
+  bookingId            String
+  driverId             String
+  bidAmount            Float
+  estimatedArrivalTime Int // minutes
+  bidStatus            BidStatus @default(ACTIVE)
+  expiresAt            DateTime
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  // Relations
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  driver  Driver  @relation(fields: [driverId], references: [id], onDelete: Cascade)
+
+  @@map("ride_bids")
 }
 
 model ApiUsageLog {

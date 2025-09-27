@@ -1,0 +1,1503 @@
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "high_error_rate",
+    "rule_name": "High Error Rate",
+    "severity": "critical"
+  },
+  "operation": "rule_added",
+  "pid": 15408,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.654Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "high_response_time",
+    "rule_name": "High Response Time",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 15408,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.657Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "database_connection_failures",
+    "rule_name": "Database Connection Failures",
+    "severity": "critical"
+  },
+  "operation": "rule_added",
+  "pid": 15408,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.657Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "ai_service_high_latency",
+    "rule_name": "AI Service High Latency",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 15408,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.658Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "memory_usage_high",
+    "rule_name": "High Memory Usage",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 15408,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.658Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "booking_success_rate_low",
+    "rule_name": "Low Booking Success Rate",
+    "severity": "medium"
+  },
+  "operation": "rule_added",
+  "pid": 15408,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.658Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "multiple_failed_auth_attempts",
+    "rule_name": "Multiple Failed Authentication Attempts",
+    "severity": "medium"
+  },
+  "operation": "rule_added",
+  "pid": 15408,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.658Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Default alert rules initialized",
+  "metadata": {
+    "rules_count": 7
+  },
+  "operation": "rules_initialization",
+  "pid": 15408,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.658Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert evaluation loop started",
+  "metadata": {
+    "interval_ms": 30000
+  },
+  "operation": "evaluation_loop_start",
+  "pid": 15408,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.659Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert manager initialized",
+  "metadata": {
+    "alerts_enabled": true,
+    "escalation_enabled": true,
+    "evaluation_interval": 30000,
+    "suppression_enabled": true
+  },
+  "operation": "initialization",
+  "pid": 15408,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.660Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "high_error_rate",
+    "rule_name": "High Error Rate",
+    "severity": "critical"
+  },
+  "operation": "rule_added",
+  "pid": 16216,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.842Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "high_response_time",
+    "rule_name": "High Response Time",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 16216,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.848Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "database_connection_failures",
+    "rule_name": "Database Connection Failures",
+    "severity": "critical"
+  },
+  "operation": "rule_added",
+  "pid": 16216,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.848Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "ai_service_high_latency",
+    "rule_name": "AI Service High Latency",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 16216,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.849Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "memory_usage_high",
+    "rule_name": "High Memory Usage",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 16216,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.849Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "booking_success_rate_low",
+    "rule_name": "Low Booking Success Rate",
+    "severity": "medium"
+  },
+  "operation": "rule_added",
+  "pid": 16216,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.849Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "multiple_failed_auth_attempts",
+    "rule_name": "Multiple Failed Authentication Attempts",
+    "severity": "medium"
+  },
+  "operation": "rule_added",
+  "pid": 16216,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.849Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Default alert rules initialized",
+  "metadata": {
+    "rules_count": 7
+  },
+  "operation": "rules_initialization",
+  "pid": 16216,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.849Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert evaluation loop started",
+  "metadata": {
+    "interval_ms": 30000
+  },
+  "operation": "evaluation_loop_start",
+  "pid": 16216,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.850Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert manager initialized",
+  "metadata": {
+    "alerts_enabled": true,
+    "escalation_enabled": true,
+    "evaluation_interval": 30000,
+    "suppression_enabled": true
+  },
+  "operation": "initialization",
+  "pid": 16216,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:30:58.851Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "high_error_rate",
+    "rule_name": "High Error Rate",
+    "severity": "critical"
+  },
+  "operation": "rule_added",
+  "pid": 12524,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:31:07.617Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "high_response_time",
+    "rule_name": "High Response Time",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 12524,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:31:07.628Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "database_connection_failures",
+    "rule_name": "Database Connection Failures",
+    "severity": "critical"
+  },
+  "operation": "rule_added",
+  "pid": 12524,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:31:07.629Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "ai_service_high_latency",
+    "rule_name": "AI Service High Latency",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 12524,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:31:07.629Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "memory_usage_high",
+    "rule_name": "High Memory Usage",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 12524,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:31:07.630Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "booking_success_rate_low",
+    "rule_name": "Low Booking Success Rate",
+    "severity": "medium"
+  },
+  "operation": "rule_added",
+  "pid": 12524,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:31:07.630Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "multiple_failed_auth_attempts",
+    "rule_name": "Multiple Failed Authentication Attempts",
+    "severity": "medium"
+  },
+  "operation": "rule_added",
+  "pid": 12524,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:31:07.630Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Default alert rules initialized",
+  "metadata": {
+    "rules_count": 7
+  },
+  "operation": "rules_initialization",
+  "pid": 12524,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:31:07.631Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert evaluation loop started",
+  "metadata": {
+    "interval_ms": 30000
+  },
+  "operation": "evaluation_loop_start",
+  "pid": 12524,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:31:07.631Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert manager initialized",
+  "metadata": {
+    "alerts_enabled": true,
+    "escalation_enabled": true,
+    "evaluation_interval": 30000,
+    "suppression_enabled": true
+  },
+  "operation": "initialization",
+  "pid": 12524,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:31:07.632Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "high_error_rate",
+    "rule_name": "High Error Rate",
+    "severity": "critical"
+  },
+  "operation": "rule_added",
+  "pid": 16576,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.089Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "high_response_time",
+    "rule_name": "High Response Time",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 16576,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.092Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "database_connection_failures",
+    "rule_name": "Database Connection Failures",
+    "severity": "critical"
+  },
+  "operation": "rule_added",
+  "pid": 16576,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.093Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "ai_service_high_latency",
+    "rule_name": "AI Service High Latency",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 16576,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.093Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "memory_usage_high",
+    "rule_name": "High Memory Usage",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 16576,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.093Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "booking_success_rate_low",
+    "rule_name": "Low Booking Success Rate",
+    "severity": "medium"
+  },
+  "operation": "rule_added",
+  "pid": 16576,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.093Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "multiple_failed_auth_attempts",
+    "rule_name": "Multiple Failed Authentication Attempts",
+    "severity": "medium"
+  },
+  "operation": "rule_added",
+  "pid": 16576,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.094Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Default alert rules initialized",
+  "metadata": {
+    "rules_count": 7
+  },
+  "operation": "rules_initialization",
+  "pid": 16576,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.094Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert evaluation loop started",
+  "metadata": {
+    "interval_ms": 30000
+  },
+  "operation": "evaluation_loop_start",
+  "pid": 16576,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.094Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert manager initialized",
+  "metadata": {
+    "alerts_enabled": true,
+    "escalation_enabled": true,
+    "evaluation_interval": 30000,
+    "suppression_enabled": true
+  },
+  "operation": "initialization",
+  "pid": 16576,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.095Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "high_error_rate",
+    "rule_name": "High Error Rate",
+    "severity": "critical"
+  },
+  "operation": "rule_added",
+  "pid": 16444,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.073Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "high_response_time",
+    "rule_name": "High Response Time",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 16444,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.077Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "database_connection_failures",
+    "rule_name": "Database Connection Failures",
+    "severity": "critical"
+  },
+  "operation": "rule_added",
+  "pid": 16444,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.077Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "ai_service_high_latency",
+    "rule_name": "AI Service High Latency",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 16444,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.077Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "memory_usage_high",
+    "rule_name": "High Memory Usage",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 16444,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.078Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "booking_success_rate_low",
+    "rule_name": "Low Booking Success Rate",
+    "severity": "medium"
+  },
+  "operation": "rule_added",
+  "pid": 16444,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.078Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "multiple_failed_auth_attempts",
+    "rule_name": "Multiple Failed Authentication Attempts",
+    "severity": "medium"
+  },
+  "operation": "rule_added",
+  "pid": 16444,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.078Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Default alert rules initialized",
+  "metadata": {
+    "rules_count": 7
+  },
+  "operation": "rules_initialization",
+  "pid": 16444,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.078Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert evaluation loop started",
+  "metadata": {
+    "interval_ms": 30000
+  },
+  "operation": "evaluation_loop_start",
+  "pid": 16444,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.079Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert manager initialized",
+  "metadata": {
+    "alerts_enabled": true,
+    "escalation_enabled": true,
+    "evaluation_interval": 30000,
+    "suppression_enabled": true
+  },
+  "operation": "initialization",
+  "pid": 16444,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:41.079Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "high_error_rate",
+    "rule_name": "High Error Rate",
+    "severity": "critical"
+  },
+  "operation": "rule_added",
+  "pid": 8764,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:51.382Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "high_response_time",
+    "rule_name": "High Response Time",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 8764,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:51.386Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "database_connection_failures",
+    "rule_name": "Database Connection Failures",
+    "severity": "critical"
+  },
+  "operation": "rule_added",
+  "pid": 8764,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:51.387Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "ai_service_high_latency",
+    "rule_name": "AI Service High Latency",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 8764,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:51.387Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "memory_usage_high",
+    "rule_name": "High Memory Usage",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 8764,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:51.388Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "booking_success_rate_low",
+    "rule_name": "Low Booking Success Rate",
+    "severity": "medium"
+  },
+  "operation": "rule_added",
+  "pid": 8764,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:51.388Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "multiple_failed_auth_attempts",
+    "rule_name": "Multiple Failed Authentication Attempts",
+    "severity": "medium"
+  },
+  "operation": "rule_added",
+  "pid": 8764,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:51.388Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Default alert rules initialized",
+  "metadata": {
+    "rules_count": 7
+  },
+  "operation": "rules_initialization",
+  "pid": 8764,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:51.388Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert evaluation loop started",
+  "metadata": {
+    "interval_ms": 30000
+  },
+  "operation": "evaluation_loop_start",
+  "pid": 8764,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:51.389Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert manager initialized",
+  "metadata": {
+    "alerts_enabled": true,
+    "escalation_enabled": true,
+    "evaluation_interval": 30000,
+    "suppression_enabled": true
+  },
+  "operation": "initialization",
+  "pid": 8764,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-26T23:56:51.389Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "high_error_rate",
+    "rule_name": "High Error Rate",
+    "severity": "critical"
+  },
+  "operation": "rule_added",
+  "pid": 1204,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.980Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "high_response_time",
+    "rule_name": "High Response Time",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 1204,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.983Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "database_connection_failures",
+    "rule_name": "Database Connection Failures",
+    "severity": "critical"
+  },
+  "operation": "rule_added",
+  "pid": 1204,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.983Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "ai_service_high_latency",
+    "rule_name": "AI Service High Latency",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 1204,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.984Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "memory_usage_high",
+    "rule_name": "High Memory Usage",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 1204,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.984Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "booking_success_rate_low",
+    "rule_name": "Low Booking Success Rate",
+    "severity": "medium"
+  },
+  "operation": "rule_added",
+  "pid": 1204,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.984Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "multiple_failed_auth_attempts",
+    "rule_name": "Multiple Failed Authentication Attempts",
+    "severity": "medium"
+  },
+  "operation": "rule_added",
+  "pid": 1204,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.984Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Default alert rules initialized",
+  "metadata": {
+    "rules_count": 7
+  },
+  "operation": "rules_initialization",
+  "pid": 1204,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.984Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert evaluation loop started",
+  "metadata": {
+    "interval_ms": 30000
+  },
+  "operation": "evaluation_loop_start",
+  "pid": 1204,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.985Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert manager initialized",
+  "metadata": {
+    "alerts_enabled": true,
+    "escalation_enabled": true,
+    "evaluation_interval": 30000,
+    "suppression_enabled": true
+  },
+  "operation": "initialization",
+  "pid": 1204,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.986Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "high_error_rate",
+    "rule_name": "High Error Rate",
+    "severity": "critical"
+  },
+  "operation": "rule_added",
+  "pid": 8124,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.966Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "high_response_time",
+    "rule_name": "High Response Time",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 8124,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.969Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "database_connection_failures",
+    "rule_name": "Database Connection Failures",
+    "severity": "critical"
+  },
+  "operation": "rule_added",
+  "pid": 8124,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.970Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "ai_service_high_latency",
+    "rule_name": "AI Service High Latency",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 8124,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.970Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "memory_usage_high",
+    "rule_name": "High Memory Usage",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 8124,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.970Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "booking_success_rate_low",
+    "rule_name": "Low Booking Success Rate",
+    "severity": "medium"
+  },
+  "operation": "rule_added",
+  "pid": 8124,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.971Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "multiple_failed_auth_attempts",
+    "rule_name": "Multiple Failed Authentication Attempts",
+    "severity": "medium"
+  },
+  "operation": "rule_added",
+  "pid": 8124,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.971Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Default alert rules initialized",
+  "metadata": {
+    "rules_count": 7
+  },
+  "operation": "rules_initialization",
+  "pid": 8124,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.971Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert evaluation loop started",
+  "metadata": {
+    "interval_ms": 30000
+  },
+  "operation": "evaluation_loop_start",
+  "pid": 8124,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.971Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert manager initialized",
+  "metadata": {
+    "alerts_enabled": true,
+    "escalation_enabled": true,
+    "evaluation_interval": 30000,
+    "suppression_enabled": true
+  },
+  "operation": "initialization",
+  "pid": 8124,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:06.972Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "high_error_rate",
+    "rule_name": "High Error Rate",
+    "severity": "critical"
+  },
+  "operation": "rule_added",
+  "pid": 17940,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:18.419Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "high_response_time",
+    "rule_name": "High Response Time",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 17940,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:18.423Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "database_connection_failures",
+    "rule_name": "Database Connection Failures",
+    "severity": "critical"
+  },
+  "operation": "rule_added",
+  "pid": 17940,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:18.423Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "ai_service_high_latency",
+    "rule_name": "AI Service High Latency",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 17940,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:18.424Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "memory_usage_high",
+    "rule_name": "High Memory Usage",
+    "severity": "high"
+  },
+  "operation": "rule_added",
+  "pid": 17940,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:18.424Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "booking_success_rate_low",
+    "rule_name": "Low Booking Success Rate",
+    "severity": "medium"
+  },
+  "operation": "rule_added",
+  "pid": 17940,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:18.424Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert rule added",
+  "metadata": {
+    "rule_id": "multiple_failed_auth_attempts",
+    "rule_name": "Multiple Failed Authentication Attempts",
+    "severity": "medium"
+  },
+  "operation": "rule_added",
+  "pid": 17940,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:18.424Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Default alert rules initialized",
+  "metadata": {
+    "rules_count": 7
+  },
+  "operation": "rules_initialization",
+  "pid": 17940,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:18.424Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert evaluation loop started",
+  "metadata": {
+    "interval_ms": 30000
+  },
+  "operation": "evaluation_loop_start",
+  "pid": 17940,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:18.425Z"
+}
+{
+  "client": {},
+  "component": "alerting",
+  "environment": "production",
+  "hostname": "Mr-Hacker",
+  "level": "info",
+  "message": "Alert manager initialized",
+  "metadata": {
+    "alerts_enabled": true,
+    "escalation_enabled": true,
+    "evaluation_interval": 30000,
+    "suppression_enabled": true
+  },
+  "operation": "initialization",
+  "pid": 17940,
+  "service": "fairgo-main",
+  "timestamp": "2025-09-27T00:01:18.425Z"
+}

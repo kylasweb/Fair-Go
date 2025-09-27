@@ -22,6 +22,8 @@ import {
   CheckCircle,
   AlertCircle
 } from 'lucide-react'
+import { MapView, NavigationPanel, DriverLocationTracker } from '../navigation'
+import { BidInterface } from '../bidding'
 
 interface DriverStats {
   todayEarnings: number
@@ -301,8 +303,10 @@ export function DriverDashboard({ driverId }: DriverDashboardProps) {
 
         {/* Tabs */}
         <Tabs defaultValue="active" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="active">Active Rides</TabsTrigger>
+            <TabsTrigger value="bidding">Bidding</TabsTrigger>
+            <TabsTrigger value="navigation">Navigation</TabsTrigger>
             <TabsTrigger value="history">Ride History</TabsTrigger>
             <TabsTrigger value="earnings">Earnings</TabsTrigger>
             <TabsTrigger value="profile">Profile</TabsTrigger>
@@ -395,6 +399,69 @@ export function DriverDashboard({ driverId }: DriverDashboardProps) {
                     ))}
                   </div>
                 )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="bidding" className="space-y-4">
+            <BidInterface
+              driverId={driverId}
+              onBidPlaced={() => {
+                // Refresh any relevant data if needed
+                console.log('Bid placed, refreshing data...')
+              }}
+            />
+          </TabsContent>
+
+          <TabsContent value="navigation" className="space-y-4">
+            <div className="grid lg:grid-cols-2 gap-4">
+              {/* Location Tracker */}
+              <DriverLocationTracker
+                driverId={driverId}
+                bookingId={activeBookings[0]?.id}
+                onLocationUpdate={(location) => {
+                  setCurrentLocation(location)
+                }}
+              />
+
+              {/* Navigation Panel for Active Booking */}
+              {activeBookings.length > 0 && (
+                <NavigationPanel
+                  bookingId={activeBookings[0].id}
+                  driverId={driverId}
+                />
+              )}
+            </div>
+
+            {/* Map View */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Navigation className="h-5 w-5" />
+                  Live Map
+                </CardTitle>
+                <CardDescription>
+                  Your current location and active ride route
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <MapView
+                  center={currentLocation}
+                  zoom={15}
+                  markers={[
+                    {
+                      position: currentLocation,
+                      title: 'Your Location',
+                      icon: '🚗'
+                    },
+                    ...(activeBookings.length > 0 ? [{
+                      position: { lat: 12.9716, lng: 77.5946 }, // Mock pickup location
+                      title: 'Pickup Location',
+                      icon: '📍'
+                    }] : [])
+                  ]}
+                  className="w-full h-64 rounded-lg"
+                />
               </CardContent>
             </Card>
           </TabsContent>
